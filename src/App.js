@@ -1,8 +1,23 @@
 import React from "react";
+import useLocalStorage from "use-local-storage";
+import './index';
+
 
 function App() {
+
+
+  const[theme, setTheme] = useLocalStorage("theme" ? "Dark" : "Light");
+
+  const themeName = theme;
+  const onSwitch = () => {
+    const newTheme = theme === "Light" ? "Dark" : "Light";
+    setTheme(newTheme);
+    themeName = newTheme;
+  }
+  
+  
   return (
-    <div className="main">
+    <div className="main" dark-theme={theme}>
       <div className="login">
         <h1>Login</h1>
         <div className="container">
@@ -32,8 +47,8 @@ function App() {
           <p className="create">Create Account</p>
         </div>
         <div className="theme-toggle">
-          <h2>Light theme</h2>
-          <i class="fa-solid fa-toggle-on"></i>
+          <h3>{themeName} Mode</h3>
+          <i class="fa-solid fa-toggle-on" onClick={onSwitch}></i>
         </div>
 
       </div>
